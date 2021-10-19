@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QueryMsg",
+  "anyOf": [
+    {
+      "description": "Returns contract owner's address Response [`Addr`]",
+      "type": "object",
+      "required": [
+        "get_owner"
+      ],
+      "properties": {
+        "get_owner": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_flag"
+      ],
+      "properties": {
+        "get_flag": {
+          "type": "object",
+          "required": [
+            "subject"
+          ],
+          "properties": {
+            "subject": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_flags"
+      ],
+      "properties": {
+        "get_flags": {
+          "type": "object",
+          "required": [
+            "subjects"
+          ],
+          "properties": {
+            "subjects": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_rac"
+      ],
+      "properties": {
+        "get_rac": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QueryMsg",
+  "anyOf": [
+    {
+      "type": "object",
+      "required": [
+        "get_phase_aggregators"
+      ],
+      "properties": {
+        "get_phase_aggregators": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_proposed_round_data"
+      ],
+      "properties": {
+        "get_proposed_round_data": {
+          "type": "object",
+          "required": [
+            "round_id"
+          ],
+          "properties": {
+            "round_id": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_proposed_latest_round_data"
+      ],
+      "properties": {
+        "get_proposed_latest_round_data": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_proposed_aggregator"
+      ],
+      "properties": {
+        "get_proposed_aggregator": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_aggregator"
+      ],
+      "properties": {
+        "get_aggregator": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_phase_id"
+      ],
+      "properties": {
+        "get_phase_id": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "aggregator_query"
+      ],
+      "properties": {
+        "aggregator_query": {
+          "$ref": "#/definitions/QueryMsg"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_owner"
+      ],
+      "properties": {
+        "get_owner": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "definitions": {
+    "QueryMsg": {
+      "anyOf": [
+        {
+          "description": "Query data for a specific round Response: [`RoundDataResponse`].",
+          "type": "object",
+          "required": [
+            "get_round_data"
+          ],
+          "properties": {
+            "get_round_data": {
+              "type": "object",
+              "required": [
+                "round_id"
+              ],
+              "properties": {
+                "round_id": {
+                  "description": "The round ID to retrieve the round data for",
+                  "type": "integer",
+                  "format": "uint32",
+                  "minimum": 0.0
+                }
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "Query data for the latest round Response: [`RoundDataResponse`].",
+          "type": "object",
+          "required": [
+            "get_latest_round_data"
+          ],
+          "properties": {
+            "get_latest_round_data": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "get_decimals"
+          ],
+          "properties": {
+            "get_decimals": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "get_description"
+          ],
+          "properties": {
+            "get_description": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "get_version"
+          ],
+          "properties": {
+            "get_version": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "get_latest_answer"
+          ],
+          "properties": {
+            "get_latest_answer": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
