@@ -34,10 +34,12 @@ async function run() {
   console.log("Deploying Price Consumer Contract");
 
   const consmCodeId = await upload(CONSUMER_PATH);
+  await sleep(12000);
   console.log("instatiating contract");
   // Specify the proxy address for the asset pair that you want to retrieve.
   // See https://docs.chain.link/docs/terra-data-feeds/ for a list of feeds.
   const consmAddress = await instantiate(consmCodeId, {"proxy": "terra1u475ps69rmhpf4f4gx2pc74l7tlyu4hkj4wp9d"})
+  await sleep(12000);
   console.log("reading contract");
   const result = await terra.wasm.contractQuery(consmAddress, { "get_latest_round_data": {} } )
   console.log(result);
@@ -99,6 +101,12 @@ function extractCodeId(logs) {
 function extractContractAddress(logs) {
   const parsed = JSON.parse(logs);
   return parsed[0]["events"][0]["attributes"][3]["value"];
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }
 
 export default {};
