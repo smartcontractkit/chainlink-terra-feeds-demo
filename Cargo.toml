@@ -1,9 +1,17 @@
 [workspace]
+name = "price-consumer-demo"
+version = "0.1.0"
+authors = ["Zak Ayesh <44901995+ZakAyesh@users.noreply.github.com>"]
+edition = "2018"
 
 members = [
-    "contracts/*",
-    "packages/*"
+    "contracts/*"
 ]
+
+resolver = "2"
+
+[profile.dev]
+overflow-checks = true
 
 [profile.release]
 opt-level = 3
@@ -14,4 +22,7 @@ debug-assertions = false
 codegen-units = 1
 panic = 'abort'
 incremental = false
+overflow-checks = true
+
+[profile.test]
 overflow-checks = true
