@@ -9,7 +9,7 @@ import {
 
 
 const CONSUMER_PATH =
-  "./artifacts/consumer.wasm";
+  "./artifacts/price_consumer.wasm";
 
 // Get the wallet seed phrase from the environment variable.
 const TERRA_SEED = process.env.TERRA_SEED
@@ -38,10 +38,10 @@ async function run() {
   console.log("instatiating contract");
   // Specify the proxy address for the asset pair that you want to retrieve.
   // See https://docs.chain.link/docs/terra-data-feeds/ for a list of feeds.
-  const consmAddress = await instantiate(consmCodeId, {"proxy": "terra1u475ps69rmhpf4f4gx2pc74l7tlyu4hkj4wp9d"})
+  const consmAddress = await instantiate(consmCodeId, {"feed": "terra185esv8hg3ddn85fkwgznskf95k0th9ryvegeak"})
   await sleep(12000);
   console.log("reading contract");
-  const result = await terra.wasm.contractQuery(consmAddress, { "get_latest_round_data": {} } )
+  const result = await terra.wasm.contractQuery(consmAddress, { "latest_round_data": {} } )
   console.log(result);
 }
 

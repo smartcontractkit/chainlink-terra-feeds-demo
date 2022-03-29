@@ -7,12 +7,8 @@ pub enum ContractError {
     Std(#[from] StdError),
 
     #[error("{0}")]
-    Owned(#[from] owned::error::ContractError),
+    Owned(#[from] owned::Error),
 
-    /// Only callable by owner
-    #[error("Only callable by owner")]
-    NotOwner {},
-
-    #[error("No Access")]
-    NoAccess {},
+    #[error("Unauthorized")]
+    Unauthorized,
 }

@@ -3,7 +3,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct InstantiateMsg {
-    //pub rac_address: Addr,
+    pub raising_access_controller: String,
+    pub lowering_access_controller: String,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
@@ -16,7 +17,7 @@ pub enum ExecuteMsg {
         to: String,
     },
     /// Finish contract ownership transfer. Can be used only by pending owner
-    AcceptOwnership {},
+    AcceptOwnership,
     RaiseFlag {
         subject: String,
     },
@@ -36,12 +37,12 @@ pub enum ExecuteMsg {
 pub enum QueryMsg {
     /// Returns contract owner's address
     /// Response [`Addr`]
-    GetOwner {},
-    GetFlag {
+    Owner,
+    Flag {
         subject: String,
     },
-    GetFlags {
+    Flags {
         subjects: Vec<String>,
     },
-    GetRac {},
+    RaisingAccessController,
 }

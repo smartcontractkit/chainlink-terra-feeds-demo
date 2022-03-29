@@ -5,9 +5,11 @@ use thiserror::Error;
 pub enum ContractError {
     #[error("{0}")]
     Std(#[from] StdError),
+
+    #[error("{0}")]
+    OwnedError(#[from] owned::Error),
+
     /// Only callable by owner
     #[error("Only callable by owner")]
-    NotOwner,
-    #[error("{0}")]
-    OwnedError(#[from] owned::error::ContractError),
+    Unauthorized,
 }

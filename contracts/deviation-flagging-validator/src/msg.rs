@@ -1,6 +1,27 @@
-use cosmwasm_std::{Addr, Uint128};
+use cosmwasm_std::Addr;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
+
+// TODO: Deduplicate (also declared in 'contracts/ocr2/src/state.rs')
+// https://github.com/smartcontractkit/chainlink-terra/issues/18
+pub mod bignum {
+    use serde::{self, Deserialize, Deserializer, Serializer};
+
+    pub fn serialize<S>(bigint: &i128, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        serializer.serialize_str(&bigint.to_string())
+    }
+
+    pub fn deserialize<'de, D>(deserializer: D) -> Result<i128, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let str = String::deserialize(deserializer)?;
+        str::parse::<i128>(&str).map_err(serde::de::Error::custom)
+    }
+}
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct InstantiateMsg {
@@ -22,7 +43,7 @@ pub enum ExecuteMsg {
         to: String,
     },
     /// Finish contract ownership transfer. Can be used only by pending owner
-    AcceptOwnership {},
+    AcceptOwnership,
     /// Updates the flagging threshold
     /// Can be used only by owner
     SetFlaggingThreshold { threshold: u32 },
@@ -36,12 +57,16 @@ pub enum ExecuteMsg {
         previous_round_id: u32,
         /// Previous answer, used as the median of difference with the current
         /// answer to determine if the deviation threshold has been exceeded
-        previous_answer: Uint128,
+        #[serde(with = "bignum")]
+        #[schemars(with = "String")]
+        previous_answer: i128,
         /// ID of the current round
         round_id: u32,
         /// Current answer which is compared for a ration of change to make sure
         /// it has not exceeded the flagging threshold
-        answer: Uint128,
+        #[serde(with = "bignum")]
+        #[schemars(with = "String")]
+        answer: i128,
     },
 }
 
@@ -54,17 +79,21 @@ pub enum QueryMsg {
     IsValid {
         /// Previous answer, used as the median of difference with the current
         /// answer to determine if the deviation threshold has been exceeded
-        previous_answer: Uint128,
+        #[serde(with = "bignum")]
+        #[schemars(with = "String")]
+        previous_answer: i128,
         /// Current answer which is compared for a ration of change to make sure
         /// it has not exceeded the flagging threshold
-        answer: Uint128,
+        #[serde(with = "bignum")]
+        #[schemars(with = "String")]
+        answer: i128,
     },
     /// Query the flagging threshold
     /// Response: [`u32`]
-    GetFlaggingThreshold {},
+    FlaggingThreshold,
     /// Returns contract owner's address
     /// Response [`Addr`]
-    GetOwner {},
+    Owner,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
