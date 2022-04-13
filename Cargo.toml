@@ -1,5 +1,5 @@
 [workspace]
-name = "price-consumer-demo"
+name = "chainlink-price-consumer-demo"
 version = "0.1.0"
 authors = ["Zak Ayesh <44901995+ZakAyesh@users.noreply.github.com>"]
 edition = "2022"
