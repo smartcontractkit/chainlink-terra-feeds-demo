@@ -39,23 +39,6 @@ This produces a `.wasm` build file in the
 `./target/wasm32-unknown-unknown/release/` directory for each
 contract.
 
-
-### Generating JSON Schema
-
-While the Wasm calls (`init`, `handle`, `query`) accept JSON, this is not enough
-information to use it. We need to expose the schema for the expected messages
-to the clients. You can generate this schema by calling `cargo schema`, which
-will output four files in `./YOUR_CONTRACT/schema`, corresponding to the three
-message types the contract accepts, as well as the internal `State`.
-
-```sh
-cd ./contracts/YOUR_CONTRACT && cargo schema
-```
-
-These files are in standard json-schema format, which should be usable by
-various client side tools, either to auto-generate codecs, or just to
-validate incoming json with regard to the defined schema.
-
 ### Preparing the Wasm bytecode for production
 
 Before we upload it to a chain, we need to ensure the smallest output size
