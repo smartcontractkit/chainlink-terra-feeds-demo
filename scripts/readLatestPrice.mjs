@@ -32,8 +32,8 @@ run();
 
 async function run() {
   console.log("Deploying Price Consumer Contract");
-
   const consmCodeId = await upload(CONSUMER_PATH);
+  // A delay to make sure Terra node is up to date
   await sleep(12000);
   console.log("instatiating contract");
   // Specify the proxy address for the asset pair that you want to retrieve.
