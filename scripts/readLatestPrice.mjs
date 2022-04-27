@@ -38,7 +38,7 @@ async function run() {
   console.log("instatiating contract");
   // Specify the proxy address for the asset pair that you want to retrieve.
   // See https://docs.chain.link/docs/terra-data-feeds/ for a list of feeds.
-  const consmAddress = await instantiate(consmCodeId, {"feed": "terra185esv8hg3ddn85fkwgznskf95k0th9ryvegeak"})
+  const consmAddress = await instantiate(consmCodeId, {"feed": "terra1l90n7cqfnk68eeysjuhfxfgnajnz97lh378v6k"})
   await sleep(12000);
   console.log("reading contract");
   const result = await terra.wasm.contractQuery(consmAddress, { "latest_round_data": {} } )
